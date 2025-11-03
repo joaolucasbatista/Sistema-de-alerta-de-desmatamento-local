@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ForestGuard Dashboard</title>
+  <link rel="icon" href="assets/forest.png">
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1><span>Sistema de Alerta de Desmatamento</span></h1>
+    <h2>Painel do sistema</h2>
+    
+  </header>
+
+  <main>
+    <section class="map-section">
+      <h3>Mapa de alertas em tempo real</h3>
+      <p>Visualização em tempo real de alertas de desmatamento provenientes de sensores.</p>
+      <div id="map"></div>
+    </section>
+
+    <aside class="alerts-section">
+      
+      <h3>Status dos Sensores</h3>
+      <p>Verificação de quais sensores estão online.</p>
+      <ul id="sensor-status-list">
+      </ul>
+      <hr class="section-divider">
+
+      <h3>Alertas Recentes</h3>
+      <p>Lista dos alertas de desmatamento mais recentes detectados.</p>
+      <ul id="alert-list"></ul>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>

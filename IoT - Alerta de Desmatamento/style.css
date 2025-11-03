@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f7e9;
+  color: #333;
+}
+
+header {
+  background-color: #f3f1d9;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+header h1 {
+  margin: 0;
+  color: #215c3d;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+header h2 {
+  margin: 0.2rem 0 0;
+  font-weight: 500;
+  color: #444;
+}
+
+main {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+}
+
+.map-section {
+  flex: 2;
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#map {
+  width: 100%;
+  height: 60vh;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+}
+
+.alerts-section {
+  flex: 1;
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.alerts-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.alerts-section li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f6f6f6;
+  margin: 0.4rem 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+}
+
+.alert-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.alert-sensor {
+  font-weight: bold;
+}
+
+.alert-time {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.alert-confidence {
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+.conf-high {
+  background-color: #28a745;
+}
+
+.conf-medium {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.conf-low {
+  background-color: #dc3545;
+}
+
+.alerts-section li {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.alerts-section li:hover {
+  background-color: #f3f1d9;
+}
+
+.alerts-section li:hover .alert-sensor {
+  color: #215c3d;
+}
+
+.section-divider {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 1.5rem 0.5rem;
+}
+
+#sensor-status-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sensor-status-list li {
+  display: flex;
+  align-items: center;
+  background: #fdfdfd;
+  margin: 0.4rem 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+}
+
+#sensor-status-list .status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+#sensor-status-list .sensor-online .status-dot {
+  background-color: #28a745;
+}
+#sensor-status-list .sensor-online {
+  color: #155724;
+  background-color: #eaf7ed;
+  border-color: #d6f0db;
+}
+
+#sensor-status-list .sensor-offline .status-dot {
+  background-color: #dc3545;
+}
+#sensor-status-list .sensor-offline {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
