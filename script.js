@@ -20,13 +20,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-const alertaIconUrl = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3JpbXNvbiI+PHBhdGggZD0iTTEyIDJDOC4xMyAyIDUgNS4xMyA1IDljMCA1LjI1IDcgMTMgNyAxM3M3LTcuNzUgNy0xM2MwLTMuODctMy4xMy03LTctN3ptMCAxMS41Yy0xLjM4IDAtMi41LTEuMTItMi41LTIuNVMxMC42MiA4IDEyIDhzMi41IDEuMTIgMi41IDIuNS0xLjEyIDIuNS0yLjUgMi41eiIvPjwvc3ZnPg==';
-
 const alertaIcon = L.icon({
-  iconUrl: alertaIconUrl,
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -28]
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
 });
 
 const alertList = document.getElementById('alert-list');
@@ -40,7 +40,7 @@ function exibirAlerta(alerta, id) {
   const newMarker = L.marker([coordenadas.latitude, coordenadas.longitude], { icon: alertaIcon })
     .addTo(map)
     .bindPopup(`
-      <b>🚨 Sensor:</b> ${sensor_id}<br>
+      <b>Sensor:</b> ${sensor_id}<br>
       <b>Confiança:</b> ${(nivel_confianca * 100).toFixed(1)}%<br>
       <b>Hora:</b> ${new Date(timestamp).toLocaleString()}
     `);
@@ -84,7 +84,7 @@ onChildAdded(alertasRef, (snapshot) => {
             latitude: parseFloat(alerta.geoloc.split(',')[0]),
             longitude: parseFloat(alerta.geoloc.split(',')[1])
         },
-        nivel_confianca: 0.95
+        nivel_confianca: alerta.nivel_confianca || 0.7 
     };
     
     exibirAlerta(alertaFormatado, alertaId);
@@ -119,19 +119,33 @@ onValue(sensorStatusRef, (snapshot) => {
       const lastSeenTime = new Date(status.last_seen).getTime();
 
       const li = document.createElement('li');
+      
+      const nameDiv = document.createElement('div');
+      nameDiv.style.display = 'flex';
+      nameDiv.style.alignItems = 'center';
+      
       const dot = document.createElement('span');
       dot.className = 'status-dot';
       
       const text = document.createElement('span');
       text.textContent = sensorId.replace(/_/g, ' '); 
 
-      li.appendChild(dot);
-      li.appendChild(text);
+      nameDiv.appendChild(dot);
+      nameDiv.appendChild(text);
+
+      const statusText = document.createElement('span');
+      statusText.style.fontWeight = 'normal';
+      statusText.style.fontSize = '0.85rem';
+
+      li.appendChild(nameDiv);
+      li.appendChild(statusText);
 
       if (now - lastSeenTime < SENSOR_TIMEOUT) {
         li.className = 'sensor-online';
+        statusText.textContent = 'Online';
       } else {
         li.className = 'sensor-offline';
+        statusText.textContent = 'Offline';
       }
 
       sensorStatusList.appendChild(li);

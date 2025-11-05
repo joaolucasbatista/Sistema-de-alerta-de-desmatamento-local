@@ -142,6 +142,7 @@ main {
   font-weight: 600;
   border: 1px solid #f0f0f0;
   font-size: 0.9rem;
+  justify-content: space-between;
 }
 
 #sensor-status-list .status-dot {
