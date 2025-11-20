@@ -1,44 +1,152 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Alerta de Desmatamento</title>
-  <link rel="icon" href="assets/forest.png">
-  
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de monitoramento em tempo real de desmatamento com sensores IoT e alertas instantâneos">
+    <meta name="keywords" content="monitoramento florestal, desmatamento, IoT, sensores, alertas ambientais">
+    <title>ForestWatch - Monitoramento em Tempo Real de Desmatamento</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <header>
-    <h1><span>Sistema de Alerta de Desmatamento</span></h1>
-    <h2>Painel do sistema</h2>
-  </header>
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon" aria-hidden="true">🌲</div>
+            <h1>ForestWatch</h1>
+        </div>
+        
+        <nav class="nav" aria-label="Principal">
+    <a href="index.html" class="nav-item active" aria-current="page">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+    </a>
+        <a href="relatorios.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Relatórios
+    </a>
+        <a href="sensores.html" class="nav-item">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
+        Sensores
+    </a>
 
-  <main>
-    <section class="map-section">
-      <h3>Mapa de alertas em tempo real</h3>
-      <p>Visualização em tempo real de alertas de desmatamento provenientes de sensores.</p>
-      <div id="map"></div>
-    </section>
+    </nav>
 
-    <aside class="alerts-section">
-      
-      <h3>Status dos Sensores</h3>
-      <p>Verificação de quais sensores estão online.</p>
-      <ul id="sensor-status-list">
-        </ul>
-      <hr class="section-divider">
+        <div class="user-section">
+            <button class="notification-btn" aria-label="Notificações">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                <span id="notification-badge" class="badge">0</span> </button>
+            <div class="user-info">
+                <div class="avatar">AS</div>
+                <div>
+                    <p class="user-name">Agente Silva</p>
+                    <p class="user-role">Fiscalização</p>
+                </div>
+            </div>
+        </div>
+    </header>
 
-      <h3>Alertas Recentes</h3>
-      <p>Lista dos alertas de desmatamento mais recentes detectados.</p>
-      <ul id="alert-list">
-        </ul>
-    </aside>
-  </main>
+    <main class="container">
+        <section class="page-header">
+            <h2 class="page-title">Monitoramento em Tempo Real</h2>
+            <p class="page-subtitle">Visão geral dos alertas de desmatamento detectados pelos sensores IoT</p>
+        </section>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="module" src="script.js" defer></script>
+        <section class="stats" aria-label="Estatísticas">
+            <article class="stat-card">
+                <div class="stat-icon red" aria-hidden="true">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                </div>
+                <h3 class="stat-label">Alertas Novos</h3>
+                <p class="stat-value" id="stat-alertas-novos">0</p> <p class="stat-detail" id="stat-alertas-hora">+0 última hora</p> </article>
+
+            <article class="stat-card">
+                <div class="stat-icon orange" aria-hidden="true">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3 class="stat-label">Em Análise</h3>
+                <p class="stat-value" id="stat-em-analise">0</p> <p class="stat-detail" id="stat-analise-pendentes">0 pendentes</p> </article>
+
+            <article class="stat-card">
+                <div class="stat-icon green" aria-hidden="true">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3 class="stat-label">Resolvidos Hoje</h3>
+                <p class="stat-value" id="stat-resolvidos-hoje">0</p> <p class="stat-detail" id="stat-resolvidos-comp">+0 vs ontem</p> </article>
+
+            <article class="stat-card">
+                <div class="stat-icon blue" aria-hidden="true">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
+                </div>
+                <h3 class="stat-label">Sensores Ativos</h3>
+                <p class="stat-value"><span id="sensors-online">0</span>/<span id="sensors-total">0</span></p> <p class="stat-detail" id="sensors-percent">0% online</p> </article>
+        </section>
+
+        <div class="main-grid">
+            <section class="panel" aria-labelledby="map-title">
+                <header class="panel-header">
+                    <h3 id="map-title" class="panel-title">Mapa de Alertas</h3>
+                    <button class="fullscreen-btn" aria-label="Tela cheia">⛶</button>
+                </header>
+                <div class="map-wrapper">
+                    <div id="map" role="img" aria-label="Mapa de alertas de desmatamento"></div>
+                    <aside class="legend" aria-label="Legenda do mapa">
+                        <h4>Legenda</h4>
+                        <ul>
+                            <li><span class="legend-color red"></span>Alerta Novo</li>
+                            <li><span class="legend-color orange"></span>Em Análise</li>
+                            <li><span class="legend-color green"></span>Resolvido</li>
+                        </ul>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="panel" aria-labelledby="feed-title">
+                <header class="panel-header">
+                    <h3 id="feed-title" class="panel-title">Feed de Alertas</h3>
+                </header>
+
+                <nav class="tabs" role="tablist" aria-label="Filtros de alertas">
+                    <button class="tab active" role="tab" aria-selected="true">Todos (0)</button> <button class="tab" role="tab" aria-selected="false">Novos (0)</button> <button class="tab" role="tab" aria-selected="false">Em Análise (0)</button> <button class="tab" role="tab" aria-selected="false">Resolvidos (0)</button> </nav>
+
+                <ul class="feed" id="alert-list">
+                    </ul>
+            </section>
+        </div>
+    </main>
+
+    <div id="action-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3 id="modal-sensor-name">Sensor X</h3>
+                <button id="close-modal" class="close-btn">&times;</button>
+            </header>
+            
+            <div class="modal-body">
+                <p><strong>Status Atual:</strong> <span id="modal-status-badge" class="status">NOVO</span></p>
+                <p class="modal-info">O que você deseja fazer com este alerta?</p>
+                
+                <div class="modal-actions">
+                    <button id="btn-analise" class="action-btn btn-orange">
+                        <i class="bi bi-clock"></i> Assumir Análise
+                    </button>
+                    
+                    <button id="btn-resolver" class="action-btn btn-green">
+                        <i class="bi bi-check-circle"></i> Marcar Resolvido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script type="module" src="script.js" defer></script>
+</body>
+</html>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    
+    <script type="module" src="script.js" defer></script>
 </body>
 </html>

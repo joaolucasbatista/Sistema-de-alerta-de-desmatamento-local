@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForestWatch - Monitoramento de Sensores</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon" aria-hidden="true">🌲</div>
+            <h1>ForestWatch</h1>
+        </div>
+        
+        <nav class="nav">
+            <a href="index.html" class="nav-item">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+                Dashboard
+            </a>
+            <a href="relatorios.html" class="nav-item">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                Relatórios
+            </a>
+            <a href="sensores.html" class="nav-item active">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
+                Sensores
+            </a>
+        </nav>
+
+        <div class="user-section">
+            <button class="notification-btn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                <span id="notification-badge" class="badge">0</span>
+            </button>
+            <div class="user-info">
+                <div class="avatar">AS</div>
+                <div>
+                    <p class="user-name">Agente Silva</p>
+                    <p class="user-role">Fiscalização</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="page-header">
+            <h2 class="page-title">Monitoramento de Sensores</h2>
+            <p class="page-subtitle">Status em tempo real da rede de sensores IoT</p>
+        </section>
+
+        <div class="sensors-layout">
+            <section class="panel map-panel">
+                <header class="panel-header">
+                    <h3 class="panel-title">Distribuição Geográfica</h3>
+                    <div class="map-filters">
+                        <button class="filter-pill active">Todos (<span id="count-total">0</span>)</button>
+                        <button class="filter-pill">Online (<span id="count-online">0</span>)</button>
+                        <button class="filter-pill">Offline (<span id="count-offline">0</span>)</button>
+                    </div>
+                </header>
+                <div class="map-wrapper-large">
+                    <div id="sensors-map"></div>
+                </div>
+            </section>
+
+            <section class="panel list-panel">
+                <header class="panel-header">
+                    <h3 class="panel-title">Status dos Sensores</h3>
+                    <div class="status-summary">
+                        <div class="status-box">
+                            <span class="status-num" id="summary-online">0</span>
+                            <span class="status-label">Online</span>
+                        </div>
+                        <div class="status-box warning">
+                            <span class="status-num" id="summary-atencao">0</span>
+                            <span class="status-label">Atenção</span>
+                        </div>
+                        <div class="status-box danger">
+                            <span class="status-num" id="summary-offline">0</span>
+                            <span class="status-label">Offline</span>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="sensors-list" id="sensors-list-container">
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script type="module" src="sensores.js" defer></script>
+</body>
+</html>
