@@ -611,20 +611,34 @@ select.btn-secondary:focus {
 
 /* Header (Logo) */
 .login-header {
-    text-align: center;
+    /* Transforma o cabeçalho inteiro em uma coluna flexível */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Força o alinhamento central perfeito */
+    justify-content: center;
     margin-bottom: 32px;
+    text-align: center;
 }
 
 .logo-area {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 12px; /* Espaço entre a árvore e o SADEL */
     margin-bottom: 8px;
+    width: 100%; /* Garante que o container ocupe a largura para centralizar */
 }
 
+.logo-area .logo-img {
+    /* Se você estiver usando a imagem da árvore */
+    height: 40px; 
+    width: auto;
+    object-fit: contain;
+}
+
+/* Caso ainda esteja usando a div com ícone, mantenha este, senão pode apagar */
 .logo-area .logo-icon {
-    width: 40px; /* Levemente maior */
+    width: 40px;
     height: 40px;
     background-color: #10B981;
     color: white;
@@ -636,10 +650,10 @@ select.btn-secondary:focus {
 }
 
 .logo-area h1 {
-    font-size: 28px; /* Maior */
-    font-weight: 800; /* Extra Bold */
+    font-size: 28px;
+    font-weight: 800;
     color: #111827;
-    letter-spacing: -0.5px; /* Letras mais juntas */
+    letter-spacing: -0.5px;
     margin: 0;
 }
 
@@ -937,4 +951,130 @@ select.btn-secondary:focus {
 @media(max-width: 1024px) {
     .sensors-layout { grid-template-columns: 1fr; height: auto; }
     .map-wrapper-large { height: 400px; }
+}
+
+/* === MENU DROPDOWN DO USUÁRIO === */
+
+.user-dropdown-wrapper {
+    position: relative; /* Necessário para o menu absoluto funcionar */
+}
+
+.user-info {
+    cursor: pointer; /* Mãozinha ao passar o mouse */
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.user-info:hover {
+    background-color: #f3f4f6;
+}
+
+/* A Caixa do Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 120%; /* Logo abaixo do nome */
+    right: 0;
+    width: 220px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    z-index: 3000; /* Acima de tudo */
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.2s ease;
+}
+
+/* Estado Escondido */
+.dropdown-menu.hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+/* Cabeçalho do Menu (Nome/Email) */
+.dropdown-header {
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+    border-radius: 10px 10px 0 0;
+}
+
+.dropdown-user-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.dropdown-user-email {
+    font-size: 12px;
+    color: #6b7280;
+    margin: 2px 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Links do Menu */
+.dropdown-links {
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+}
+
+.dropdown-links li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #374151;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.dropdown-links li a:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+.dropdown-links li a i {
+    width: 16px; /* Alinha os ícones */
+    text-align: center;
+    color: #9ca3af;
+}
+
+/* Divisor */
+.dropdown-links .divider {
+    height: 1px;
+    background-color: #e5e7eb;
+    margin: 8px 0;
+}
+
+/* Item de Sair (Vermelho ao passar o mouse) */
+.dropdown-links .logout-item a:hover {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+.dropdown-links .logout-item a:hover i {
+    color: #dc2626;
+}
+
+/* Controla o tamanho da imagem do logo */
+.logo img {
+    height: 40px; /* Tamanho fixo para caber no menu */
+    width: auto;  /* Mantém a proporção da imagem */
+    object-fit: contain; /* Garante que a imagem não distorça */
+}
+
+/* Garante que o container do logo alinhe tudo no centro */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
 }
