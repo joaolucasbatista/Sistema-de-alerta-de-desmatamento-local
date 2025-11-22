@@ -334,3 +334,27 @@ function formatarTempoRelativo(timestamp) {
     if (horas < 24) return `há ${horas}h`;
     return `há ${Math.floor(horas/24)} dias`;
 }
+
+/* === CORREÇÃO DO MENU MOBILE === */
+document.addEventListener('DOMContentLoaded', () => {
+    const btnMenu = document.querySelector('.mobile-menu-btn');
+    const menuNavegacao = document.querySelector('.nav');
+
+    if (btnMenu && menuNavegacao) {
+        // Ao clicar no botão, abre/fecha o menu
+        btnMenu.addEventListener('click', (e) => {
+            e.preventDefault(); // Previne comportamentos estranhos
+            menuNavegacao.classList.toggle('active');
+        });
+
+        // Ao clicar em qualquer link dentro do menu, fecha o menu
+        const links = menuNavegacao.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menuNavegacao.classList.remove('active');
+            });
+        });
+    } else {
+        console.error("Erro: Botão do menu ou Navegação não encontrados no HTML.");
+    }
+});

@@ -1123,187 +1123,264 @@ select.btn-secondary:focus {
 
 /* --- CELULARES (Max 768px) --- */
 /* --- CELULARES (Max 768px) --- */
-@media (max-width: 768px) {
+/* --- CELULARES (Max 768px) --- */
+/* === CORREÇÃO FINAL MOBILE (Substitua o final do seu CSS) === */
 
-    .header {
-        padding: 12px 16px;
-        position: relative;
-    }
-    
-    .logo h1 { font-size: 18px; }
-    
-    /* 1. ESCONDER O SINO DE NOTIFICAÇÃO */
-    .notification-btn {
-        display: none;
-    }
-
-    /* 2. ESCONDER O AVATAR DO HEADER (Já tem dentro do menu) */
-    .user-dropdown-wrapper {
-        display: none; /* Isso remove a bolinha do topo */
-    }
-
-    /* 3. MOSTRAR APENAS O BOTÃO DO MENU */
-    .mobile-menu-btn { 
-        display: block;
-        margin-left: auto; /* Garante que fique na direita */
-        padding: 8px; /* Aumenta a área de toque */
-    }
-
-    /* O Menu vira uma gaveta vertical */
-    .nav {
-        display: none; /* Escondido até clicar */
-        position: absolute;
-        top: 100%; left: 0; width: 100%;
-        background-color: #ffffff;
-        flex-direction: column;
-        padding: 10px;
-        border-bottom: 1px solid #e5e7eb;
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-        z-index: 2000;
-        gap: 5px;
-    }
-    
-    .nav.active { display: flex; }
-    
-    .nav-item { width: 100%; justify-content: flex-start; }
-    
-    /* --- PERFIL DENTRO DO MENU (Mobile) --- */
-    /* Isso garante que o perfil apareça DENTRO do menu aberto */
-    .mobile-user-options {
-        display: flex;
-        flex-direction: column;
-        margin-top: 16px;
-        padding-top: 16px;
-        border-top: 1px solid #e5e7eb;
-    }
-
-    .mobile-user-info {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 0 12px 12px 12px;
-    }
-
-    .mobile-user-name {
-        font-size: 14px;
-        font-weight: 700;
-        color: #111827;
-        margin: 0;
-    }
-
-    .mobile-user-email {
-        font-size: 12px;
-        color: #6b7280;
-        margin: 0;
-    }
-
-    /* Ajuste de Cards */
-    .stats, .summary-grid { grid-template-columns: 1fr; }
-    .stat-value { font-size: 28px; }
-    .page-title { font-size: 22px; }
-    
-    /* Login */
-    .login-card { padding: 24px; }
-    .login-wrapper { padding: 16px; }
-    .logo-area h1 { font-size: 22px; }
-}
-
-/* === CORREÇÃO DE LAYOUT MOBILE (RELATÓRIOS) === */
-
-/* Apenas no Celular */
-@media (max-width: 768px) {
-    
-    /* 1. Empilha o Título e os Botões */
-    .reports-header {
-        flex-direction: column; /* Um embaixo do outro */
-        align-items: flex-start; /* Alinha à esquerda */
-        gap: 16px; /* Espaço entre o texto e os botões */
-    }
-
-    /* 2. Faz os botões ocuparem a largura total (melhor para o dedo) */
-    .page-actions {
-        width: 100%;
-        display: flex;
-        flex-direction: column; /* Botões um embaixo do outro também */
-        gap: 10px;
-    }
-
-    /* Estica o Select e o Botão */
-    #periodo-select, 
-    #btn-export-csv { /* Vamos adicionar esse ID no HTML jájá */
-        width: 100%; 
-    }
-    
-    /* Ajuste no subtítulo para não quebrar feio */
-    .page-subtitle {
-        font-size: 13px;
-        line-height: 1.4;
-    }
-}
-
-/* === CORREÇÃO DE OVERFLOW E LAYOUT MOBILE === */
-
-/* 1. Trava global para impedir rolagem lateral */
+/* 1. Trava Global de Largura (Impede rolagem lateral) */
 html, body {
-    max-width: 100%;
-    overflow-x: hidden; /* Corta qualquer coisa que vaze para a direita */
+    max-width: 100vw; /* Largura máxima é a tela */
+    overflow-x: hidden; /* Corta qualquer excesso lateral */
+    position: relative;
 }
 
-/* 2. Ajustes específicos para telas pequenas */
+/* 2. Ajustes Específicos para Celular */
 @media (max-width: 768px) {
     
-    /* Garante que o container principal não empurre a tela */
+    /* Container principal mais justo */
     .container {
-        padding: 16px; /* Reduz padding lateral */
+        padding: 12px; /* Menos espaço nas bordas da tela */
         width: 100%;
         box-sizing: border-box;
     }
 
-    /* Força os painéis (Mapas, Listas) a caberem na tela */
-    .panel, .stat-card, .login-card, .summary-card {
+    /* Header ajustado */
+    .header {
+        padding: 12px 16px;
         width: 100%;
-        max-width: 100%;
-        box-sizing: border-box; /* Inclui padding no cálculo da largura */
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    /* --- Correção dos Botões "Espremidos" (Sensores) --- */
-    .map-filters {
-        flex-wrap: wrap; /* Permite que os botões caiam para a linha de baixo */
-        gap: 8px;
+        box-sizing: border-box;
     }
     
-    .filter-pill {
-        flex: 1 1 auto; /* Faz os botões crescerem para ocupar espaço */
-        text-align: center;
-        white-space: nowrap; /* Impede que o texto quebre dentro do botão */
-        font-size: 12px; /* Diminui levemente a fonte */
-        padding: 8px;
+    /* Ajustes de Texto */
+    .logo h1 { font-size: 18px; }
+    .page-title { font-size: 20px; }
+
+    /* Botões e Menus */
+    .notification-btn, .user-dropdown-wrapper { display: none; }
+    .mobile-menu-btn { display: block; margin-left: auto; padding: 8px; }
+
+    /* Menu Gaveta (Mobile) */
+    .nav {
+        display: none; /* Escondido por padrão */
+        position: absolute; /* Flutua sobre o conteúdo */
+        top: 100%; /* Começa logo abaixo do cabeçalho */
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        flex-direction: column;
+        padding: 16px; /* Mais espaço interno */
+        border-bottom: 1px solid #e5e7eb;
+        
+        /* Sombra forte para destacar que está flutuando */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        
+        z-index: 9999; /* Garante que fique em cima de TUDO */
     }
 
-    /* --- Correção do Mapa "Vazando" --- */
-    .map-wrapper, .map-wrapper-large, .chart-wrapper, .heatmap-grid {
+    /* Quando ativo, vira Flex */
+    .nav.active {
+        display: flex !important; /* Força bruta para aparecer */
+        top: 60px; /* Garante que não fique escondido atrás do header */
+    }
+    .nav.active { display: flex; }
+    .nav-item { width: 100%; justify-content: flex-start; }
+
+    /* Perfil no Menu */
+    .mobile-user-options {
+        display: flex; flex-direction: column;
+        margin-top: 16px; padding-top: 16px;
+        border-top: 1px solid #e5e7eb;
+    }
+    .mobile-user-info { display: flex; align-items: center; gap: 12px; padding: 0 12px 12px; }
+    .mobile-user-name { font-size: 14px; font-weight: 700; margin: 0; }
+    .mobile-user-email { font-size: 12px; color: #6b7280; margin: 0; }
+
+    /* --- CORREÇÃO CRÍTICA DE LAYOUT --- */
+    
+    /* Transforma tudo em 1 coluna */
+    .stats, .summary-grid, .main-grid, .charts-grid, .heatmap-grid, .sensors-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* Força os cards a não vazarem */
+    .panel, .stat-card, .summary-card, .login-card {
         width: 100%;
         max-width: 100%;
-        overflow: hidden; /* Garante que o mapa não vaze as bordas arredondadas */
+        box-sizing: border-box;
+        padding: 16px; /* Reduzi de 24px para 16px para dar mais espaço ao conteúdo */
+        margin: 0;
+    }
+
+    /* Mapa e Gráficos: Largura controlada */
+    .map-wrapper, .map-wrapper-large, .chart-wrapper {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
     }
 
     #map, #heatmap-map, #sensors-map {
+        width: 100% !important;
+        height: 300px; /* Altura um pouco menor para caber melhor na tela */
+        max-width: 100%;
+    }
+
+    /* Correção das Tabelas e Listas */
+    .feed, .heatmap-list {
+        max-height: 350px;
+    }
+
+    /* Correção da página de Relatórios (Botões empilhados) */
+    .reports-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .page-actions {
         width: 100%;
-        /* Garante que o mapa renderize corretamente dentro da caixa */
+        flex-direction: column;
+        gap: 10px;
+    }
+    #periodo-select, #btn-export-csv, .btn-primary, select.btn-secondary {
+        width: 100%;
+        max-width: 100%;
     }
     
-    /* Ajuste do Header para não vazar */
-    .header {
+    /* Correção das Abas (Scroll lateral se não couber) */
+    .tabs {
         width: 100%;
-        box-sizing: border-box;
-        padding: 12px 16px;
-        justify-content: space-between;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+
+    /* --- REFINAMENTO FINAL MOBILE --- */
+
+    /* 1. Ajuste dos Botões de Filtro (Sensores) */
+    .map-filters {
+        display: flex;
+        gap: 8px;
+        width: 100%; /* Ocupa a largura toda */
     }
     
-    /* Ajuste da Logo para não empurrar */
-    .logo h1 {
-        font-size: 16px; /* Levemente menor */
+    .filter-pill {
+        flex: 1; /* Todos com o mesmo tamanho */
+        text-align: center;
+        padding: 8px 4px; /* Ajuste para texto não quebrar */
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 36px; /* Altura fixa para alinhar */
+    }
+
+    /* 2. Ajuste do Mapa de Calor e Zonas */
+    .heatmap-grid {
+        display: flex;
+        flex-direction: column;
+        height: auto; /* Deixa crescer conforme o conteúdo */
+        gap: 16px;
+    }
+
+    #heatmap-map {
+        height: 300px; /* Altura fixa boa para mobile */
+        width: 100% !important;
+    }
+
+    /* Lista de Zonas mais compacta e bonita */
+    .heatmap-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 colunas de zonas */
+        gap: 10px;
+        max-height: none; /* Remove scroll, mostra tudo */
+        padding-right: 0;
+    }
+
+    .heatmap-list .zone-item {
+        font-size: 12px;
+        padding: 10px;
+        flex-direction: column; /* Texto em cima, número embaixo */
+        align-items: center;
+        text-align: center;
+        gap: 4px;
+    }
+    
+    .heatmap-list .zone-item span:last-child {
+        font-size: 16px; /* Número maior */
+    }
+
+    /* 3. Ajuste dos Tooltips do Mapa (Labels das Zonas) */
+    /* Esconde os labels flutuantes no celular para não poluir o mapa */
+    .leaflet-tooltip {
+        display: none !important;
+    }
+}
+
+/* === CORREÇÕES FINAIS DE POLIMENTO (Botões e Espaçamento) === */
+
+/* 1. Conserta os Botões de Filtro (Sensores) */
+.filter-pill {
+    white-space: nowrap !important;   /* PROIBIDO quebrar linha (Texto fica reto) */
+    display: inline-flex !important;  /* Alinha texto e número na mesma linha */
+    align-items: center;
+    justify-content: center;
+    width: auto !important;           /* Deixa o botão ter o tamanho que precisa */
+    flex: 0 0 auto !important;        /* Impede que o layout esmague o botão */
+    min-width: 80px;                  /* Tamanho mínimo confortável */
+    padding: 8px 16px !important;
+}
+
+.map-filters {
+    flex-wrap: wrap !important;       /* Se não couber na tela, o botão cai pra linha de baixo (não espreme) */
+    gap: 10px;
+}
+
+/* 2. Descola o Resumo Executivo (Relatórios) */
+.summary-executive {
+    margin-top: 48px !important;      /* Adiciona um bom espaço acima do título */
+    position: relative;
+}
+
+/* Opcional: Adiciona uma linha divisória suave antes do resumo */
+.summary-executive::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #e5e7eb;
+    margin-bottom: 24px;
+}
+
+/* === CORREÇÃO FINAL: BOTÕES DO MAPA (MOBILE) === */
+
+@media (max-width: 768px) {
+    
+    /* 1. Força o cabeçalho do mapa a empilhar (Título em cima, Botões embaixo) */
+    .map-panel .panel-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+
+    /* 2. Estica a caixa dos botões para ocupar a largura toda */
+    .map-filters {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row !important; /* Garante que fiquem lado a lado */
+        justify-content: space-between !important;
+        gap: 8px !important;
+    }
+
+    /* 3. Faz os 3 botões terem exatamente o mesmo tamanho */
+    .filter-pill {
+        flex: 1 !important; /* Cada um pega 33% do espaço */
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 8px 4px !important;
+        margin: 0 !important;
+        width: auto !important;
     }
 }

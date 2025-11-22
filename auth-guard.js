@@ -1,91 +1,106 @@
-/* === auth-guard.js (MODO LIVRE) === */
-/* Controla apenas a interface (Menu Mobile, Dropdown) sem pedir senha */
+/* === auth-guard.js === */
+/* Gerencia Autenticação e Menu Mobile Globalmente */
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyC1uaBiz6qJB-lsawhjt2twKmVfmDnDylg",
+    authDomain: "banco-de-dados-3ea2f.firebaseapp.com",
+    projectId: "banco-de-dados-3ea2f",
+    storageBucket: "banco-de-dados-3ea2f.firebasestorage.app",
+    messagingSenderId: "426130374237",
+    appId: "1:426130374237:web:1d8ba4c603a3b070ee57b4",
+    databaseURL: "https://banco-de-dados-3ea2f-default-rtdb.firebaseio.com"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// --- 1. Lógica do Menu Mobile (Executa assim que o DOM carrega) ---
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Modo de acesso livre ativado.");
+    console.log("Inicializando Menu Mobile...");
     
-    // 1. SIMULAÇÃO DE USUÁRIO LOGADO
-    // Como não tem login, vamos "fingir" que o Agente Silva entrou
-    const usuarioSimulado = {
-        nome: "Agente Silva",
-        email: "agente.silva@forestwatch.gov.br",
-        iniciais: "AS"
-    };
-
-    atualizarInterfaceUsuario(usuarioSimulado);
-    configurarMenus();
-});
-
-function atualizarInterfaceUsuario(user) {
-    // Referências da UI (Desktop e Mobile)
-    const userNameDisplay = document.querySelector('.user-name');
-    const dropdownNameDisplay = document.querySelector('.dropdown-user-name');
-    const userEmailDisplay = document.getElementById('user-email-display');
-    
-    // Mobile
-    const mobileNameDisplay = document.querySelector('.mobile-user-name');
-    const mobileEmailDisplay = document.querySelector('.mobile-user-email');
-    
-    // Avatares
-    const avatarDisplays = document.querySelectorAll('.avatar'); 
-
-    // Preenche os textos na tela
-    if (userNameDisplay) userNameDisplay.textContent = user.nome;
-    if (dropdownNameDisplay) dropdownNameDisplay.textContent = user.nome;
-    if (userEmailDisplay) userEmailDisplay.textContent = user.email;
-
-    if (mobileNameDisplay) mobileNameDisplay.textContent = user.nome;
-    if (mobileEmailDisplay) mobileEmailDisplay.textContent = user.email;
-
-    // Preenche as bolinhas (Avatares)
-    avatarDisplays.forEach(av => av.textContent = user.iniciais);
-}
-
-function configurarMenus() {
-    // --- LÓGICA DO MENU DROPDOWN (Desktop) ---
-    const userMenuBtn = document.getElementById('user-menu-btn');
-    const userDropdown = document.getElementById('user-dropdown');
-    
-    if (userMenuBtn && userDropdown) {
-        userMenuBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            userDropdown.classList.toggle('hidden');
-        });
-        document.addEventListener('click', (e) => {
-            if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
-                userDropdown.classList.add('hidden');
-            }
-        });
-    }
-
-    // --- LÓGICA DO MENU MOBILE (Celular) ---
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const btnMobile = document.querySelector('.mobile-menu-btn');
     const navMenu = document.querySelector('.nav');
 
-    if (mobileBtn && navMenu) {
-        // Abrir/Fechar ao clicar no botão
-        mobileBtn.addEventListener('click', () => {
+    if (btnMobile && navMenu) {
+        // Remove clones de event listeners antigos
+        const newBtn = btnMobile.cloneNode(true);
+        btnMobile.parentNode.replaceChild(newBtn, btnMobile);
+
+        newBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("Menu clicado!"); // Debug
             navMenu.classList.toggle('active');
         });
 
-        // Fechar automaticamente ao clicar em qualquer link
+        // Fecha ao clicar nos links
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
         });
+    } else {
+        console.warn("Menu Mobile: Botão ou Nav não encontrados nesta página.");
     }
+});
 
-    // --- BOTÃO SAIR (Apenas recarrega a página ou vai pro Google) ---
-    const btnLogout = document.getElementById('btn-logout');
-    const btnLogoutMobile = document.getElementById('btn-logout-mobile');
+// --- 2. Lógica de Usuário e Auth ---
+const userElements = {
+    name: document.querySelector('.user-name'),
+    dropdownName: document.querySelector('.dropdown-user-name'),
+    email: document.getElementById('user-email-display'),
+    mobileName: document.querySelector('.mobile-user-name'),
+    mobileEmail: document.querySelector('.mobile-user-email'),
+    avatars: document.querySelectorAll('.avatar')
+};
 
-    const funcaoSair = (e) => {
-        e.preventDefault();
-        alert("Você saiu do sistema (Simulação).");
-        // Opcional: window.location.href = 'https://google.com';
+onAuthStateChanged(auth, (user) => {
+    // Se não tem usuário, simula um (Modo Prototipagem)
+    const currentUser = user || { 
+        email: "agente.silva@forestwatch.gov.br", 
+        displayName: "Agente Silva" 
     };
 
-    if (btnLogout) btnLogout.addEventListener('click', funcaoSair);
-    if (btnLogoutMobile) btnLogoutMobile.addEventListener('click', funcaoSair);
+    // Formata nome
+    const rawName = currentUser.email.split('@')[0];
+    const formattedName = rawName.split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+    const initials = formattedName.substring(0, 2).toUpperCase();
+
+    // Atualiza UI com segurança (verifica se elemento existe antes de preencher)
+    if (userElements.name) userElements.name.textContent = formattedName;
+    if (userElements.dropdownName) userElements.dropdownName.textContent = formattedName;
+    if (userElements.email) userElements.email.textContent = currentUser.email;
+    if (userElements.mobileName) userElements.mobileName.textContent = formattedName;
+    if (userElements.mobileEmail) userElements.mobileEmail.textContent = currentUser.email;
+    
+    userElements.avatars.forEach(av => av.textContent = initials);
+});
+
+// --- 3. Dropdown Desktop ---
+const userMenuBtn = document.getElementById('user-menu-btn');
+const userDropdown = document.getElementById('user-dropdown');
+
+if (userMenuBtn && userDropdown) {
+    userMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userDropdown.classList.toggle('hidden');
+    });
+    document.addEventListener('click', (e) => {
+        if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+            userDropdown.classList.add('hidden');
+        }
+    });
 }
+
+// --- 4. Logout ---
+window.fazerLogout = () => {
+    signOut(auth).then(() => window.location.reload()).catch(console.error);
+};
+
+const btnsLogout = document.querySelectorAll('#btn-logout, #btn-logout-mobile');
+btnsLogout.forEach(btn => {
+    if(btn) btn.addEventListener('click', (e) => { e.preventDefault(); window.fazerLogout(); });
+});
