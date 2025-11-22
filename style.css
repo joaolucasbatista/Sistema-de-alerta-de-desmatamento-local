@@ -1240,3 +1240,70 @@ select.btn-secondary:focus {
         line-height: 1.4;
     }
 }
+
+/* === CORREÇÃO DE OVERFLOW E LAYOUT MOBILE === */
+
+/* 1. Trava global para impedir rolagem lateral */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* Corta qualquer coisa que vaze para a direita */
+}
+
+/* 2. Ajustes específicos para telas pequenas */
+@media (max-width: 768px) {
+    
+    /* Garante que o container principal não empurre a tela */
+    .container {
+        padding: 16px; /* Reduz padding lateral */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Força os painéis (Mapas, Listas) a caberem na tela */
+    .panel, .stat-card, .login-card, .summary-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box; /* Inclui padding no cálculo da largura */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* --- Correção dos Botões "Espremidos" (Sensores) --- */
+    .map-filters {
+        flex-wrap: wrap; /* Permite que os botões caiam para a linha de baixo */
+        gap: 8px;
+    }
+    
+    .filter-pill {
+        flex: 1 1 auto; /* Faz os botões crescerem para ocupar espaço */
+        text-align: center;
+        white-space: nowrap; /* Impede que o texto quebre dentro do botão */
+        font-size: 12px; /* Diminui levemente a fonte */
+        padding: 8px;
+    }
+
+    /* --- Correção do Mapa "Vazando" --- */
+    .map-wrapper, .map-wrapper-large, .chart-wrapper, .heatmap-grid {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden; /* Garante que o mapa não vaze as bordas arredondadas */
+    }
+
+    #map, #heatmap-map, #sensors-map {
+        width: 100%;
+        /* Garante que o mapa renderize corretamente dentro da caixa */
+    }
+    
+    /* Ajuste do Header para não vazar */
+    .header {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 16px;
+        justify-content: space-between;
+    }
+    
+    /* Ajuste da Logo para não empurrar */
+    .logo h1 {
+        font-size: 16px; /* Levemente menor */
+    }
+}
