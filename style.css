@@ -1078,3 +1078,165 @@ select.btn-secondary:focus {
     font-weight: 700;
     color: #111827;
 }
+
+/* === RESPONSIVIDADE (COLE NO FINAL DO STYLE.CSS) === */
+
+/* === RESPONSIVIDADE E MENU MOBILE (Versão Limpa) === */
+
+/* 1. Botão Mobile (Hambúrguer) - Só aparece no celular */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #374151;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+}
+.mobile-menu-btn:hover {
+    background-color: #f3f4f6;
+}
+
+/* 2. Perfil dentro do Menu (Escondido no PC) */
+.mobile-user-options {
+    display: none;
+}
+
+/* --- TABLETS (Max 1024px) --- */
+@media (max-width: 1024px) {
+    .container { padding: 20px; }
+    
+    .stats, .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    
+    .main-grid, .charts-grid, .heatmap-grid, .sensors-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    #map, #heatmap-map, #sensors-map { height: 400px; }
+    .feed, .heatmap-list { max-height: 400px; }
+    .map-wrapper-large { height: 400px; }
+}
+
+/* --- CELULARES (Max 768px) --- */
+/* --- CELULARES (Max 768px) --- */
+@media (max-width: 768px) {
+
+    .header {
+        padding: 12px 16px;
+        position: relative;
+    }
+    
+    .logo h1 { font-size: 18px; }
+    
+    /* 1. ESCONDER O SINO DE NOTIFICAÇÃO */
+    .notification-btn {
+        display: none;
+    }
+
+    /* 2. ESCONDER O AVATAR DO HEADER (Já tem dentro do menu) */
+    .user-dropdown-wrapper {
+        display: none; /* Isso remove a bolinha do topo */
+    }
+
+    /* 3. MOSTRAR APENAS O BOTÃO DO MENU */
+    .mobile-menu-btn { 
+        display: block;
+        margin-left: auto; /* Garante que fique na direita */
+        padding: 8px; /* Aumenta a área de toque */
+    }
+
+    /* O Menu vira uma gaveta vertical */
+    .nav {
+        display: none; /* Escondido até clicar */
+        position: absolute;
+        top: 100%; left: 0; width: 100%;
+        background-color: #ffffff;
+        flex-direction: column;
+        padding: 10px;
+        border-bottom: 1px solid #e5e7eb;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        z-index: 2000;
+        gap: 5px;
+    }
+    
+    .nav.active { display: flex; }
+    
+    .nav-item { width: 100%; justify-content: flex-start; }
+    
+    /* --- PERFIL DENTRO DO MENU (Mobile) --- */
+    /* Isso garante que o perfil apareça DENTRO do menu aberto */
+    .mobile-user-options {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .mobile-user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 12px 12px 12px;
+    }
+
+    .mobile-user-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: #111827;
+        margin: 0;
+    }
+
+    .mobile-user-email {
+        font-size: 12px;
+        color: #6b7280;
+        margin: 0;
+    }
+
+    /* Ajuste de Cards */
+    .stats, .summary-grid { grid-template-columns: 1fr; }
+    .stat-value { font-size: 28px; }
+    .page-title { font-size: 22px; }
+    
+    /* Login */
+    .login-card { padding: 24px; }
+    .login-wrapper { padding: 16px; }
+    .logo-area h1 { font-size: 22px; }
+}
+
+/* === CORREÇÃO DE LAYOUT MOBILE (RELATÓRIOS) === */
+
+/* Apenas no Celular */
+@media (max-width: 768px) {
+    
+    /* 1. Empilha o Título e os Botões */
+    .reports-header {
+        flex-direction: column; /* Um embaixo do outro */
+        align-items: flex-start; /* Alinha à esquerda */
+        gap: 16px; /* Espaço entre o texto e os botões */
+    }
+
+    /* 2. Faz os botões ocuparem a largura total (melhor para o dedo) */
+    .page-actions {
+        width: 100%;
+        display: flex;
+        flex-direction: column; /* Botões um embaixo do outro também */
+        gap: 10px;
+    }
+
+    /* Estica o Select e o Botão */
+    #periodo-select, 
+    #btn-export-csv { /* Vamos adicionar esse ID no HTML jájá */
+        width: 100%; 
+    }
+    
+    /* Ajuste no subtítulo para não quebrar feio */
+    .page-subtitle {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+}
