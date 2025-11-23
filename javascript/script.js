@@ -1,10 +1,6 @@
-/* === ForestWatch script.js === */
-/* v3.1 - Popup Completo e Clique Inteligente (Zoom vs Modal) */
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { getDatabase, ref, onChildAdded, onChildChanged, onValue, query, orderByChild, update } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 
-// --- 1. Configuração do Firebase ---
 const firebaseConfig = {
     apiKey: "AIzaSyC1uaBiz6qJB-lsawhjt2twKmVfmDnDylg",
     authDomain: "banco-de-dados-3ea2f.firebaseapp.com",
@@ -15,14 +11,12 @@ const firebaseConfig = {
     databaseURL: "https://banco-de-dados-3ea2f-default-rtdb.firebaseio.com"
 };
 
-// --- 2. Constantes e Inicialização ---
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const MAP_INITIAL_ZOOM = 14;
 const MAP_FLYTO_ZOOM = 16;
-const SENSOR_TIMEOUT_MS = 45000;
+const SENSOR_TIMEOUT_MS = 60000; 
 
-// --- 3. Mapa ---
 const map = L.map('map').setView([-7.249, -39.496], MAP_INITIAL_ZOOM);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
@@ -34,9 +28,7 @@ const alertaIcon = L.icon({
     iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
 });
 
-// --- 4. Referências do DOM ---
 const alertList = document.getElementById('alert-list');
-// Stats
 const statAlertasNovos = document.getElementById('stat-alertas-novos');
 const statAlertasHora = document.getElementById('stat-alertas-hora');
 const statEmAnalise = document.getElementById('stat-em-analise');
@@ -47,9 +39,7 @@ const statSensoresOnline = document.getElementById('sensors-online');
 const statSensoresTotal = document.getElementById('sensors-total');
 const statSensoresPercent = document.getElementById('sensors-percent');
 const notificationBadge = document.getElementById('notification-badge');
-// Filtros
 const filterTabs = document.querySelectorAll('.tabs .tab');
-// Modal
 const modal = document.getElementById('action-modal');
 const modalSensorName = document.getElementById('modal-sensor-name');
 const modalStatusBadge = document.getElementById('modal-status-badge');
@@ -57,13 +47,10 @@ const btnCloseModal = document.getElementById('close-modal');
 const btnAnalise = document.getElementById('btn-analise');
 const btnResolver = document.getElementById('btn-resolver');
 
-// --- 5. Estado da Aplicação ---
 const alertMarkers = {};
 const todosAlertasMap = new Map(); 
 let currentAlertId = null; 
 let filtroAtual = 'todos'; 
-
-// --- 6. Funções Principais ---
 
 function atualizarContadores() {
     let total = 0, novos = 0, analise = 0, resolvidos = 0;
@@ -93,11 +80,8 @@ function atualizarContadores() {
     }
 }
 
-/**
- * Função que Renderiza (Cria ou Atualiza) o Card na Lista
- */
 function renderizarAlerta(alerta, id) {
-    const sensor_id = "Sensor Norte"; 
+    const sensor_id = alerta.nome_sensor || alerta.sensor_id || "Sensor Desconhecido"; 
     const tipo_som = alerta.tipo_som_detectado || "Não id.";
     const timestamp = new Date(alerta.data_hora) || new Date();
     const confPercent = (alerta.nivel_confianca * 100).toFixed(0);
@@ -112,13 +96,11 @@ function renderizarAlerta(alerta, id) {
         case 'novo': default: statusConfig = { class: 'novo', text: 'Novo', iconClass: 'red' }; break;
     }
 
-    // 1. Marcador no Mapa e Popup (CORRIGIDO: Com todas as informações)
     if (!alertMarkers[id]) {
         const newMarker = L.marker([lat, lng], { icon: alertaIcon }).addTo(map);
         alertMarkers[id] = newMarker;
     }
     
-    // *** POPUP COMPLETO RESTAURADO ***
     alertMarkers[id].bindPopup(`
         <b>${sensor_id}</b><br>
         <b>Tipo:</b> ${tipo_som}<br>
@@ -128,7 +110,6 @@ function renderizarAlerta(alerta, id) {
         <b>Confiança:</b> ${confPercent}%
     `);
 
-    // 2. Item da Lista (Cria ou Atualiza)
     let li = document.getElementById(`alert-${id}`);
     if (!li) {
         li = document.createElement('li');
@@ -168,11 +149,7 @@ function renderizarAlerta(alerta, id) {
         </div>
     `;
 
-    // *** LÓGICA DE CLIQUE INTELIGENTE ***
-    
-    // 1. O card inteiro dá ZOOM no mapa
     li.onclick = (e) => {
-        // Se clicou no botão da seta ou no status, NÃO dá zoom (deixa eles tratarem)
         if (e.target.closest('.action-trigger') || e.target.closest('.status')) return;
         
         const marker = alertMarkers[id];
@@ -182,16 +159,14 @@ function renderizarAlerta(alerta, id) {
         }
     };
 
-    // 2. O botão da seta abre o MODAL
     const setinha = li.querySelector('.action-trigger');
     if (setinha) {
         setinha.onclick = (e) => {
-            e.stopPropagation(); // Impede o zoom do mapa
+            e.stopPropagation(); 
             abrirModal(id);
         };
     }
     
-    // 3. O badge de status também abre o MODAL (opcional, mas útil)
     const statusBadge = li.querySelector('.status');
     if (statusBadge) {
         statusBadge.onclick = (e) => {
@@ -203,9 +178,6 @@ function renderizarAlerta(alerta, id) {
     reaplicarFiltro();
 }
 
-
-// --- 7. Lógica do Modal e Ações ---
-
 function abrirModal(id) {
     const alerta = todosAlertasMap.get(id);
     if (!alerta) return;
@@ -213,7 +185,7 @@ function abrirModal(id) {
     currentAlertId = id;
     const statusKey = alerta.status || 'novo';
 
-    if(modalSensorName) modalSensorName.textContent = "Sensor Norte";
+    if(modalSensorName) modalSensorName.textContent = alerta.nome_sensor || "Sensor";
     
     if(modalStatusBadge) {
         modalStatusBadge.className = `status ${statusKey}`;
@@ -258,9 +230,6 @@ function atualizarStatusFirebase(id, novoStatus) {
         .catch((err) => console.error("Erro ao atualizar:", err));
 }
 
-
-// --- 8. Listeners do Firebase ---
-
 const alertasRef = query(ref(db, 'alertas/'), orderByChild("data_hora"));
 
 onChildAdded(alertasRef, (snapshot) => {
@@ -278,9 +247,6 @@ onChildChanged(alertasRef, (snapshot) => {
     renderizarAlerta(alerta, snapshot.key); 
     atualizarContadores(); 
 });
-
-
-// --- 9. Filtros e Utilitários ---
 
 filterTabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -335,26 +301,21 @@ function formatarTempoRelativo(timestamp) {
     return `há ${Math.floor(horas/24)} dias`;
 }
 
-/* === CORREÇÃO DO MENU MOBILE === */
 document.addEventListener('DOMContentLoaded', () => {
     const btnMenu = document.querySelector('.mobile-menu-btn');
     const menuNavegacao = document.querySelector('.nav');
 
     if (btnMenu && menuNavegacao) {
-        // Ao clicar no botão, abre/fecha o menu
         btnMenu.addEventListener('click', (e) => {
-            e.preventDefault(); // Previne comportamentos estranhos
+            e.preventDefault(); 
             menuNavegacao.classList.toggle('active');
         });
 
-        // Ao clicar em qualquer link dentro do menu, fecha o menu
         const links = menuNavegacao.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', () => {
                 menuNavegacao.classList.remove('active');
             });
         });
-    } else {
-        console.error("Erro: Botão do menu ou Navegação não encontrados no HTML.");
     }
 });
