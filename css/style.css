@@ -1383,4 +1383,82 @@ html, body {
         margin: 0 !important;
         width: auto !important;
     }
+
+    /* === ESTILOS PARA CARTÕES DE SENSORES DINÂMICOS === */
+
+.sensor-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 10px;
+    border-left: 5px solid #ccc; /* Cor padrão offline */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.sensor-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.sensor-card.online {
+    border-left-color: #10b981; /* Verde */
+}
+
+.sensor-card.offline {
+    border-left-color: #ef4444; /* Vermelho */
+}
+
+.sensor-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #1f2937;
+}
+
+.sensor-id {
+    font-size: 0.85em;
+    color: #6b7280;
+    margin: 0;
+}
+
+.last-seen {
+    font-size: 0.8em;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+
+.sensor-status {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-badge.online {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.offline {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.battery-level {
+    font-size: 0.85em;
+    color: #4b5563;
+    font-weight: 600;
+}
 }

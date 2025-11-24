@@ -335,29 +335,32 @@ async function inicializarMapaDeCalor(alertas) {
         window.heatmapMap.setView([-7.249, -39.496], 13);
     }
     
-    // 5. Atualiza os Labels das Zonas (Simulados)
-    const zonaCentralCoords = [-7.249, -39.496];
+  // 5. Atualiza os Labels das Zonas (Apenas Norte e Sul)
+    
+    // Zona Norte (Crato/Floresta)
     const zonaNorteCoords = [-7.235, -39.500];
-    const zonaLesteCoords = [-7.245, -39.475];
+    
+    // Zona Sul (Barbalha)
+    const zonaSulCoords = [-7.310, -39.305]; 
+
     const zonaMarkerOptions = { radius: 0, fill: false, stroke: false, interactive: false };
     
-    L.circleMarker(zonaCentralCoords, zonaMarkerOptions).addTo(window.heatmapMap)
-        .bindTooltip("Zona Central", { permanent: true, direction: 'bottom', className: 'zone-label', offset: [0, 10] });
+    // Adiciona Label Norte
     L.circleMarker(zonaNorteCoords, zonaMarkerOptions).addTo(window.heatmapMap)
         .bindTooltip("Zona Norte", { permanent: true, direction: 'center', className: 'zone-label' });
-    L.circleMarker(zonaLesteCoords, zonaMarkerOptions).addTo(window.heatmapMap)
-        .bindTooltip("Zona Leste", { permanent: true, direction: 'center', className: 'zone-label' });
 
-    // 6. Atualiza a lista lateral de Zonas
+    // Adiciona Label Sul
+    L.circleMarker(zonaSulCoords, zonaMarkerOptions).addTo(window.heatmapMap)
+        .bindTooltip("Zona Sul", { permanent: true, direction: 'center', className: 'zone-label' });
+
+    // 6. Atualiza a lista lateral de Zonas (Matemática corrigida: 70% + 30% = 100%)
     const total = alertas.length;
     const lista = document.querySelector('.heatmap-list');
     if (lista) {
         if (total > 0) {
             lista.innerHTML = `
-                <div class="zone-item"><span>Zona Norte</span><span>${Math.floor(total * 0.45)}</span></div>
-                <div class="zone-item"><span>Zona Leste</span><span>${Math.floor(total * 0.30)}</span></div>
-                <div class="zone-item"><span>Zona Central</span><span>${Math.floor(total * 0.15)}</span></div>
-                <div class="zone-item"><span>Zona Sul</span><span>${Math.ceil(total * 0.10)}</span></div>
+                <div class="zone-item"><span>Zona Norte</span><span>${Math.floor(total * 0.70)}</span></div>
+                <div class="zone-item"><span>Zona Sul</span><span>${Math.ceil(total * 0.30)}</span></div>
             `;
         } else {
             lista.innerHTML = `<div style="padding:1rem; color:#6b7280; text-align:center;">Sem dados neste período</div>`;
