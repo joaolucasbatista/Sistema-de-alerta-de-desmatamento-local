@@ -29,11 +29,16 @@ Desenvolvido por alunos de Análise e Desenvolvimento de Sistemas da UniFAP. O o
 
 O sistema foi projetado para identificar riscos ambientais usando sensores simulados:
 
-* 🔊 **Detecção de Som:** O protótipo usa um sensor (simulado por um potenciômetro) para identificar padrões sonoros que sugerem o uso de motosserras.
-* 🔥 **Detecção de Queimadas:** Um segundo sensor monitora a fumaça e o gás no ambiente, ativando um alerta imediato em caso de risco de incêndio.
-* ☁️ **Alerta em Tempo Real:** Ao detectar um risco, o sistema envia um pacote de alerta imediatamente para o banco de dados na nuvem (Firebase).
-* 💓 **Monitoramento de Status:** Os sensores enviam um "sinal de vida" (heartbeat) a cada 30 segundos para confirmar que estão online.
-* 🖥️ **Dashboard de Visualização:** Uma interface web consome os dados do Firebase e exibe os alertas recebidos visualmente.
+## ✨ Funcionalidades Principais
+
+O sistema foi projetado com foco em **Edge Computing** para garantir eficiência e rapidez:
+
+* 🧠 **Edge Computing (Processamento na Borda):** Diferente de sensores comuns que apenas repassam dados, o nosso ESP32 processa e valida as informações localmente. O alerta só é disparado se os padrões de risco forem confirmados pelo código, economizando banda e processamento na nuvem.
+* 🔊 **Detecção de Som:** O algoritmo identifica padrões sonoros específicos (simulados via potenciômetro) que sugerem o uso de motosserras, filtrando ruídos irrelevantes.
+* 🔥 **Detecção de Queimadas:** Monitoramento constante de fumaça e gás. O sistema cruza dados localmente para validar o risco real de incêndio antes de emitir o alerta.
+* ☁️ **Integração Nuvem (Firebase):** Uma vez validado o perigo na borda, o sistema envia um pacote JSON otimizado para o Realtime Database.
+* 💓 **Monitoramento de Status:** Os sensores enviam um "heartbeat" (sinal de vida) a cada 30 segundos para confirmar conectividade, permitindo saber se algum sensor foi desconectado ou danificado.
+* 🖥️ **Dashboard de Visualização:** Interface web que consome os dados já tratados do Firebase e exibe os alertas visualmente para tomada de decisão.
 
 ---
 
