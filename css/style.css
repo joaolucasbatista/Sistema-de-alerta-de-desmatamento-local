@@ -1,12 +1,10 @@
-/* === STYLE.CSS - TEMA CLARO (LIGHT MODE) === */
 
-/* Reset */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
-  background-color: #f4f6f8; /* Fundo cinza bem clarinho */
-  color: #1f2937; /* Texto cinza escuro (quase preto) */
+  background-color: #f4f6f8;
+  color: #1f2937;
   line-height:1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -16,14 +14,13 @@ h1,h2,h3,h4{font-weight:600; color: #111827;}
 button{font-family:inherit;cursor:pointer}
 ul{list-style:none}
 
-/* Header */
 .header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:16px 32px;
-  background:#ffffff; /* Branco */
-  border-bottom:1px solid #e5e7eb; /* Borda cinza claro */
+  background:#ffffff;
+  border-bottom:1px solid #e5e7eb;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
@@ -32,7 +29,7 @@ ul{list-style:none}
 .logo-icon{
   width:28px;
   height:28px;
-  background:#10b981; /* Verde da marca */
+  background:#10b981;
   border-radius:6px;
   display:flex;
   align-items:center;
@@ -46,7 +43,7 @@ ul{list-style:none}
   display:flex;
   align-items:center;
   gap:8px;
-  color:#6b7280; /* Cinza médio */
+  color:#6b7280;
   text-decoration:none;
   font-size:14px;
   font-weight: 500;
@@ -59,8 +56,8 @@ ul{list-style:none}
     background-color: #f3f4f6;
 }
 .nav-item.active{
-    background-color: #ecfdf5; /* Fundo verde bem claro */
-    color: #059669; /* Texto verde escuro */
+    background-color: #ecfdf5;
+    color: #059669;
     font-weight:600;
 }
 .nav-item svg{width:18px;height:18px;}
@@ -86,7 +83,7 @@ ul{list-style:none}
   padding:2px 6px;
   font-size:10px;
   font-weight:700;
-  border: 2px solid #fff; /* Borda branca para destacar */
+  border: 2px solid #fff;
 }
 
 .user-info{display:flex;align-items:center;gap:10px}
@@ -105,13 +102,11 @@ ul{list-style:none}
 .user-name{font-size:14px;font-weight:600; color: #111827;}
 .user-role{font-size:12px;color:#6b7280}
 
-/* Main */
 .container{padding:32px;max-width:1600px;margin:0 auto}
 .page-header{margin-bottom:32px}
 .page-title{font-size:28px;letter-spacing:-.5px;margin-bottom:8px; color: #111827;}
 .page-subtitle{font-size:14px;color:#6b7280;}
 
-/* Stats */
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -138,7 +133,6 @@ ul{list-style:none}
   font-size:20px;
 }
 .stat-icon svg{width:24px;height:24px}
-/* Cores dos ícones ajustadas para fundo claro */
 .stat-icon.red{background:#fef2f2; color:#dc2626}
 .stat-icon.orange{background:#fff7ed; color:#ea580c}
 .stat-icon.green{background:#ecfdf5; color:#059669}
@@ -148,7 +142,6 @@ ul{list-style:none}
 .stat-value{font-size:36px; font-weight:700; margin-bottom:4px; letter-spacing:-1px; color: #111827;}
 .stat-detail{font-size:13px; color:#6b7280}
 
-/* Grid */
 .main-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px}
 
 .panel{
@@ -177,7 +170,6 @@ ul{list-style:none}
 }
 .fullscreen-btn:hover{color:#111827}
 
-/* Map */
 .map-wrapper{position:relative}
 #map{width:100%;height:500px;border-radius:8px;background:#e5e7eb}
 
@@ -185,7 +177,7 @@ ul{list-style:none}
   position:absolute;
   bottom:20px;
   left:20px;
-  background:rgba(255,255,255,0.95); /* Fundo branco semi-transparente */
+  background:rgba(255,255,255,0.95);
   border:1px solid #e5e7eb;
   border-radius:8px;
   padding:16px;
@@ -200,7 +192,6 @@ ul{list-style:none}
 .legend-color.orange{background:#f97316}
 .legend-color.green{background:#10b981}
 
-/* Feed */
 .tabs{display:flex;gap:8px;margin-bottom:20px; border-bottom: 1px solid #e5e7eb; padding-bottom: 12px;}
 .tab{
   background:none;
@@ -249,7 +240,6 @@ ul{list-style:none}
   flex-shrink:0;
 }
 .alert-icon svg{width:20px;height:20px}
-/* Ícones do feed com fundo claro */
 .alert-icon.red{background:#fef2f2; color:#dc2626}
 .alert-icon.orange{background:#fff7ed; color:#ea580c}
 .alert-icon.green{background:#ecfdf5; color:#059669}
@@ -284,17 +274,14 @@ ul{list-style:none}
 .status.analise{background:#ffedd5; color:#c2410c}
 .status.resolvido{background:#d1fae5; color:#047857}
 
-/* Responsividade */
 @media(max-width:1200px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .main-grid{grid-template-columns:1fr}
 }
 @media(max-width:768px){
   .stats{grid-template-columns:1fr}
-  .nav{display:none} /* Esconde menu no mobile, idealmente precisaria de um menu sanduíche */
+  .nav{display:none}
 }
-
-/* --- ESTILOS PARA RELATORIOS.HTML (TEMA CLARO) --- */
 
 .reports-header {
     display: flex;
@@ -394,7 +381,6 @@ ul{list-style:none}
     color: #111827;
 }
 
-/* Resumo Executivo */
 .summary-executive {
     margin-bottom: 24px;
 }
@@ -428,27 +414,24 @@ ul{list-style:none}
 }
 .summary-detail {
     font-size: 13px;
-    color: #10b981; /* Verde */
+    color: #10b981;
     font-weight: 500;
 }
 .summary-detail.negative {
-    color: #ef4444; /* Vermelho */
+    color: #ef4444;
 }
 
-/* Tooltip do Mapa (Heatmap) */
 .zone-label {
-    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+    background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #d1d5db;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    color: #111827; /* Texto escuro */
+    color: #111827;
     font-weight: 600;
     font-family: 'Inter', -apple-system, sans-serif;
     padding: 4px 8px;
     font-size: 12px;
 }
-
-/* === ESTILOS DO MODAL DE AÇÃO === */
 
 .modal-overlay {
     position: fixed;
@@ -456,11 +439,11 @@ ul{list-style:none}
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* Fica acima de tudo */
+    z-index: 2000;
     opacity: 1;
     transition: opacity 0.2s ease;
 }
@@ -544,7 +527,6 @@ ul{list-style:none}
 }
 .btn-green:hover { background-color: #a7f3d0; }
 
-/* Desativar botão (quando já está naquele status) */
 .action-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -565,15 +547,14 @@ ul{list-style:none}
     color: #111827;
 }
 
-/* Estilo para o Select de Período */
 select.btn-secondary {
-    appearance: none; /* Remove estilo padrão do navegador */
+    appearance: none;
     -webkit-appearance: none;
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23374151%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
     background-repeat: no-repeat;
     background-position: right 0.7rem top 50%;
     background-size: 0.65rem auto;
-    padding-right: 2.5rem; /* Espaço para a setinha */
+    padding-right: 2.5rem;
     font-family: inherit;
     cursor: pointer;
 }
@@ -584,15 +565,12 @@ select.btn-secondary:focus {
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
-/* === LOGIN PAGE STYLES (Pixel Perfect v2) === */
-
 .login-body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #F9FAFB;
-    /* Opcional: Adiciona a textura de pontinhos se quiser igual à referência da direita */
     background-image: radial-gradient(#E5E7EB 1px, transparent 1px);
     background-size: 24px 24px;
     font-family: 'Inter', sans-serif;
@@ -601,7 +579,6 @@ select.btn-secondary:focus {
 
 .login-wrapper {
     width: 100%;
-    /* AUMENTADO: De 480px para 540px para o texto caber em uma linha */
     max-width: 540px; 
     padding: 20px;
     display: flex;
@@ -609,12 +586,10 @@ select.btn-secondary:focus {
     align-items: center;
 }
 
-/* Header (Logo) */
 .login-header {
-    /* Transforma o cabeçalho inteiro em uma coluna flexível */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Força o alinhamento central perfeito */
+    align-items: center;
     justify-content: center;
     margin-bottom: 32px;
     text-align: center;
@@ -624,19 +599,17 @@ select.btn-secondary:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px; /* Espaço entre a árvore e o SADEL */
+    gap: 12px;
     margin-bottom: 8px;
-    width: 100%; /* Garante que o container ocupe a largura para centralizar */
+    width: 100%;
 }
 
 .logo-area .logo-img {
-    /* Se você estiver usando a imagem da árvore */
     height: 40px; 
     width: auto;
     object-fit: contain;
 }
 
-/* Caso ainda esteja usando a div com ícone, mantenha este, senão pode apagar */
 .logo-area .logo-icon {
     width: 40px;
     height: 40px;
@@ -664,25 +637,24 @@ select.btn-secondary:focus {
     margin: 0;
 }
 
-/* Card */
 .login-card {
     background-color: #ffffff;
-    padding: 40px; /* Mais espaço interno (padding) */
+    padding: 40px;
     border-radius: 16px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); /* Sombra mais suave e difusa */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
     border: 1px solid #E5E7EB;
     width: 100%;
     text-align: left;
 }
 
 .card-title {
-    font-family: 'Inter', sans-serif; /* Garante que é Inter */
+    font-family: 'Inter', sans-serif;
     font-size: 26px;
-    font-weight: 800; /* Extra Bold - O segredo da referência */
-    color: #111827;   /* Um preto levemente azulado, não preto puro */
+    font-weight: 800;
+    color: #111827;
     margin-bottom: 8px;
     margin-top: 0;
-    letter-spacing: -0.025em; /* Aproxima as letras (o toque final) */
+    letter-spacing: -0.025em;
 }
 
 .card-subtitle {
@@ -690,18 +662,17 @@ select.btn-secondary:focus {
     color: #6B7280;
     margin-bottom: 32px;
     line-height: 1.5;
-    white-space: nowrap; /* Força ficar em uma linha se houver espaço */
+    white-space: nowrap;
 }
 
-/* Formulário */
 .form-group {
-    margin-bottom: 24px; /* Mais espaçamento entre campos */
+    margin-bottom: 24px;
 }
 
 .login-form label {
     display: block;
     font-size: 14px;
-    font-weight: 700; /* Labels mais grossas */
+    font-weight: 700;
     color: #374151;
     margin-bottom: 8px;
 }
@@ -716,7 +687,7 @@ select.btn-secondary:focus {
     position: absolute;
     left: 16px;
     color: #9CA3AF;
-    font-size: 18px; /* Ícone um pouco maior */
+    font-size: 18px;
     pointer-events: none;
 }
 
@@ -730,7 +701,7 @@ select.btn-secondary:focus {
 
 .login-form input {
     width: 100%;
-    padding: 14px 16px 14px 48px; /* Inputs mais altos */
+    padding: 14px 16px 14px 48px;
     border: 1px solid #E5E7EB;
     border-radius: 8px;
     font-size: 15px;
@@ -748,10 +719,9 @@ select.btn-secondary:focus {
     outline: none;
     background-color: #fff;
     border-color: #10B981;
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); /* Shadow ring maior */
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
 }
 
-/* Link e Botão */
 .form-options {
     margin-bottom: 32px;
     display: flex;
@@ -760,7 +730,7 @@ select.btn-secondary:focus {
 
 .forgot-password {
     font-size: 14px;
-    color: #047857; /* Verde um pouco mais escuro */
+    color: #047857;
     font-weight: 600;
     text-decoration: none;
 }
@@ -768,9 +738,9 @@ select.btn-secondary:focus {
 
 .login-btn {
     width: 100%;
-    padding: 14px; /* Botão mais alto */
+    padding: 14px;
     font-size: 16px;
-    font-weight: 700; /* Texto do botão mais grosso */
+    font-weight: 700;
     color: white;
     background-color: #006B2C;
     border: none;
@@ -783,17 +753,14 @@ select.btn-secondary:focus {
     background-color: #065f46;
 }
 
-/* === ESTILOS DA PÁGINA DE SENSORES === */
-
 .sensors-layout {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* Mapa maior, Lista menor */
+    grid-template-columns: 2fr 1fr;
     gap: 24px;
-    height: calc(100vh - 180px); /* Ocupa a altura restante */
+    height: calc(100vh - 180px);
     min-height: 600px;
 }
 
-/* Painel do Mapa */
 .map-panel {
     display: flex;
     flex-direction: column;
@@ -836,11 +803,10 @@ select.btn-secondary:focus {
     background: #e5e7eb;
 }
 
-/* Painel da Lista */
 .list-panel {
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Impede que o painel cresça demais */
+    overflow: hidden;
 }
 
 .status-summary {
@@ -852,7 +818,7 @@ select.btn-secondary:focus {
 .status-box {
     flex: 1;
     text-align: center;
-    background: #ecfdf5; /* Verde claro */
+    background: #ecfdf5;
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #d1fae5;
@@ -876,7 +842,6 @@ select.btn-secondary:focus {
     font-weight: 600;
 }
 
-/* Lista de Cards com Scroll */
 .sensors-list {
     flex: 1;
     overflow-y: auto;
@@ -889,7 +854,6 @@ select.btn-secondary:focus {
 .sensors-list::-webkit-scrollbar { width: 6px; }
 .sensors-list::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
 
-/* Card do Sensor Individual */
 .sensor-card {
     border: 1px solid #e5e7eb;
     border-radius: 8px;
@@ -933,9 +897,8 @@ select.btn-secondary:focus {
 .stat-label { font-size: 10px; color: #9ca3af; text-transform: uppercase; }
 .stat-val { font-size: 13px; font-weight: 600; color: #374151; }
 
-/* Indicador de Status (Bolinha) */
 .sensor-status-dot {
-    margin-left: auto; /* Empurra para a direita */
+    margin-left: auto;
     font-size: 12px;
     font-weight: 600;
     display: flex;
@@ -953,14 +916,12 @@ select.btn-secondary:focus {
     .map-wrapper-large { height: 400px; }
 }
 
-/* === MENU DROPDOWN DO USUÁRIO === */
-
 .user-dropdown-wrapper {
-    position: relative; /* Necessário para o menu absoluto funcionar */
+    position: relative;
 }
 
 .user-info {
-    cursor: pointer; /* Mãozinha ao passar o mouse */
+    cursor: pointer;
     padding: 4px 8px;
     border-radius: 8px;
     transition: background-color 0.2s;
@@ -970,30 +931,27 @@ select.btn-secondary:focus {
     background-color: #f3f4f6;
 }
 
-/* A Caixa do Menu */
 .dropdown-menu {
     position: absolute;
-    top: 120%; /* Logo abaixo do nome */
+    top: 120%;
     right: 0;
     width: 220px;
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    z-index: 3000; /* Acima de tudo */
+    z-index: 3000;
     opacity: 1;
     transform: translateY(0);
     transition: all 0.2s ease;
 }
 
-/* Estado Escondido */
 .dropdown-menu.hidden {
     display: none;
     opacity: 0;
     transform: translateY(-10px);
 }
 
-/* Cabeçalho do Menu (Nome/Email) */
 .dropdown-header {
     padding: 16px;
     border-bottom: 1px solid #e5e7eb;
@@ -1017,7 +975,6 @@ select.btn-secondary:focus {
     text-overflow: ellipsis;
 }
 
-/* Links do Menu */
 .dropdown-links {
     list-style: none;
     padding: 8px 0;
@@ -1041,19 +998,17 @@ select.btn-secondary:focus {
 }
 
 .dropdown-links li a i {
-    width: 16px; /* Alinha os ícones */
+    width: 16px;
     text-align: center;
     color: #9ca3af;
 }
 
-/* Divisor */
 .dropdown-links .divider {
     height: 1px;
     background-color: #e5e7eb;
     margin: 8px 0;
 }
 
-/* Item de Sair (Vermelho ao passar o mouse) */
 .dropdown-links .logout-item a:hover {
     background-color: #fef2f2;
     color: #dc2626;
@@ -1062,14 +1017,12 @@ select.btn-secondary:focus {
     color: #dc2626;
 }
 
-/* Controla o tamanho da imagem do logo */
 .logo img {
-    height: 40px; /* Tamanho fixo para caber no menu */
-    width: auto;  /* Mantém a proporção da imagem */
-    object-fit: contain; /* Garante que a imagem não distorça */
+    height: 40px;
+    width: auto;
+    object-fit: contain;
 }
 
-/* Garante que o container do logo alinhe tudo no centro */
 .logo {
     display: flex;
     align-items: center;
@@ -1079,11 +1032,6 @@ select.btn-secondary:focus {
     color: #111827;
 }
 
-/* === RESPONSIVIDADE (COLE NO FINAL DO STYLE.CSS) === */
-
-/* === RESPONSIVIDADE E MENU MOBILE (Versão Limpa) === */
-
-/* 1. Botão Mobile (Hambúrguer) - Só aparece no celular */
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -1097,12 +1045,10 @@ select.btn-secondary:focus {
     background-color: #f3f4f6;
 }
 
-/* 2. Perfil dentro do Menu (Escondido no PC) */
 .mobile-user-options {
     display: none;
 }
 
-/* --- TABLETS (Max 1024px) --- */
 @media (max-width: 1024px) {
     .container { padding: 20px; }
     
@@ -1121,70 +1067,46 @@ select.btn-secondary:focus {
     .map-wrapper-large { height: 400px; }
 }
 
-/* --- CELULARES (Max 768px) --- */
-/* --- CELULARES (Max 768px) --- */
-/* --- CELULARES (Max 768px) --- */
-/* === CORREÇÃO FINAL MOBILE (Substitua o final do seu CSS) === */
-
-/* 1. Trava Global de Largura (Impede rolagem lateral) */
-html, body {
-    max-width: 100vw; /* Largura máxima é a tela */
-    overflow-x: hidden; /* Corta qualquer excesso lateral */
-    position: relative;
-}
-
-/* 2. Ajustes Específicos para Celular */
 @media (max-width: 768px) {
-    
-    /* Container principal mais justo */
     .container {
-        padding: 12px; /* Menos espaço nas bordas da tela */
+        padding: 12px;
         width: 100%;
         box-sizing: border-box;
     }
 
-    /* Header ajustado */
     .header {
         padding: 12px 16px;
         width: 100%;
         box-sizing: border-box;
     }
     
-    /* Ajustes de Texto */
     .logo h1 { font-size: 18px; }
     .page-title { font-size: 20px; }
 
-    /* Botões e Menus */
     .notification-btn, .user-dropdown-wrapper { display: none; }
     .mobile-menu-btn { display: block; margin-left: auto; padding: 8px; }
 
-    /* Menu Gaveta (Mobile) */
     .nav {
-        display: none; /* Escondido por padrão */
-        position: absolute; /* Flutua sobre o conteúdo */
-        top: 100%; /* Começa logo abaixo do cabeçalho */
+        display: none;
+        position: absolute;
+        top: 100%;
         left: 0;
         width: 100%;
         background-color: #ffffff;
         flex-direction: column;
-        padding: 16px; /* Mais espaço interno */
+        padding: 16px;
         border-bottom: 1px solid #e5e7eb;
-        
-        /* Sombra forte para destacar que está flutuando */
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        
-        z-index: 9999; /* Garante que fique em cima de TUDO */
+        z-index: 9999;
     }
 
-    /* Quando ativo, vira Flex */
     .nav.active {
-        display: flex !important; /* Força bruta para aparecer */
-        top: 60px; /* Garante que não fique escondido atrás do header */
+        display: flex !important;
+        top: 60px;
     }
     .nav.active { display: flex; }
     .nav-item { width: 100%; justify-content: flex-start; }
 
-    /* Perfil no Menu */
     .mobile-user-options {
         display: flex; flex-direction: column;
         margin-top: 16px; padding-top: 16px;
@@ -1194,25 +1116,20 @@ html, body {
     .mobile-user-name { font-size: 14px; font-weight: 700; margin: 0; }
     .mobile-user-email { font-size: 12px; color: #6b7280; margin: 0; }
 
-    /* --- CORREÇÃO CRÍTICA DE LAYOUT --- */
-    
-    /* Transforma tudo em 1 coluna */
     .stats, .summary-grid, .main-grid, .charts-grid, .heatmap-grid, .sensors-layout {
         display: flex;
         flex-direction: column;
         gap: 16px;
     }
 
-    /* Força os cards a não vazarem */
     .panel, .stat-card, .summary-card, .login-card {
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
-        padding: 16px; /* Reduzi de 24px para 16px para dar mais espaço ao conteúdo */
+        padding: 16px;
         margin: 0;
     }
 
-    /* Mapa e Gráficos: Largura controlada */
     .map-wrapper, .map-wrapper-large, .chart-wrapper {
         width: 100%;
         overflow: hidden;
@@ -1221,16 +1138,14 @@ html, body {
 
     #map, #heatmap-map, #sensors-map {
         width: 100% !important;
-        height: 300px; /* Altura um pouco menor para caber melhor na tela */
+        height: 300px;
         max-width: 100%;
     }
 
-    /* Correção das Tabelas e Listas */
     .feed, .heatmap-list {
         max-height: 350px;
     }
 
-    /* Correção da página de Relatórios (Botões empilhados) */
     .reports-header {
         flex-direction: column;
         align-items: flex-start;
@@ -1245,8 +1160,7 @@ html, body {
         width: 100%;
         max-width: 100%;
     }
-    
-    /* Correção das Abas (Scroll lateral se não couber) */
+
     .tabs {
         width: 100%;
         flex-wrap: nowrap;
@@ -1257,94 +1171,82 @@ html, body {
     }
     .tabs::-webkit-scrollbar { display: none; }
 
-    /* --- REFINAMENTO FINAL MOBILE --- */
-
-    /* 1. Ajuste dos Botões de Filtro (Sensores) */
     .map-filters {
         display: flex;
         gap: 8px;
-        width: 100%; /* Ocupa a largura toda */
+        width: 100%;
     }
     
     .filter-pill {
-        flex: 1; /* Todos com o mesmo tamanho */
+        flex: 1;
         text-align: center;
-        padding: 8px 4px; /* Ajuste para texto não quebrar */
+        padding: 8px 4px;
         font-size: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 36px; /* Altura fixa para alinhar */
+        height: 36px;
     }
 
-    /* 2. Ajuste do Mapa de Calor e Zonas */
     .heatmap-grid {
         display: flex;
         flex-direction: column;
-        height: auto; /* Deixa crescer conforme o conteúdo */
+        height: auto;
         gap: 16px;
     }
 
     #heatmap-map {
-        height: 300px; /* Altura fixa boa para mobile */
+        height: 300px;
         width: 100% !important;
     }
 
-    /* Lista de Zonas mais compacta e bonita */
     .heatmap-list {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 colunas de zonas */
+        grid-template-columns: 1fr 1fr;
         gap: 10px;
-        max-height: none; /* Remove scroll, mostra tudo */
+        max-height: none;
         padding-right: 0;
     }
 
     .heatmap-list .zone-item {
         font-size: 12px;
         padding: 10px;
-        flex-direction: column; /* Texto em cima, número embaixo */
+        flex-direction: column;
         align-items: center;
         text-align: center;
         gap: 4px;
     }
     
     .heatmap-list .zone-item span:last-child {
-        font-size: 16px; /* Número maior */
+        font-size: 16px;
     }
 
-    /* 3. Ajuste dos Tooltips do Mapa (Labels das Zonas) */
-    /* Esconde os labels flutuantes no celular para não poluir o mapa */
     .leaflet-tooltip {
         display: none !important;
     }
 }
 
-/* === CORREÇÕES FINAIS DE POLIMENTO (Botões e Espaçamento) === */
-
-/* 1. Conserta os Botões de Filtro (Sensores) */
 .filter-pill {
-    white-space: nowrap !important;   /* PROIBIDO quebrar linha (Texto fica reto) */
-    display: inline-flex !important;  /* Alinha texto e número na mesma linha */
+    white-space: nowrap !important;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    width: auto !important;           /* Deixa o botão ter o tamanho que precisa */
-    flex: 0 0 auto !important;        /* Impede que o layout esmague o botão */
-    min-width: 80px;                  /* Tamanho mínimo confortável */
+    width: auto !important;
+    flex: 0 0 auto !important;
+    min-width: 80px;
     padding: 8px 16px !important;
 }
 
 .map-filters {
-    flex-wrap: wrap !important;       /* Se não couber na tela, o botão cai pra linha de baixo (não espreme) */
+    flex-wrap: wrap !important;
     gap: 10px;
 }
 
-/* 2. Descola o Resumo Executivo (Relatórios) */
 .summary-executive {
-    margin-top: 48px !important;      /* Adiciona um bom espaço acima do título */
+    margin-top: 48px !important;
     position: relative;
 }
 
-/* Opcional: Adiciona uma linha divisória suave antes do resumo */
 .summary-executive::before {
     content: "";
     display: block;
@@ -1354,29 +1256,23 @@ html, body {
     margin-bottom: 24px;
 }
 
-/* === CORREÇÃO FINAL: BOTÕES DO MAPA (MOBILE) === */
-
 @media (max-width: 768px) {
-    
-    /* 1. Força o cabeçalho do mapa a empilhar (Título em cima, Botões embaixo) */
     .map-panel .panel-header {
         flex-direction: column !important;
         align-items: flex-start !important;
         gap: 12px !important;
     }
 
-    /* 2. Estica a caixa dos botões para ocupar a largura toda */
     .map-filters {
         width: 100% !important;
         display: flex !important;
-        flex-direction: row !important; /* Garante que fiquem lado a lado */
+        flex-direction: row !important;
         justify-content: space-between !important;
         gap: 8px !important;
     }
 
-    /* 3. Faz os 3 botões terem exatamente o mesmo tamanho */
     .filter-pill {
-        flex: 1 !important; /* Cada um pega 33% do espaço */
+        flex: 1 !important;
         text-align: center !important;
         justify-content: center !important;
         padding: 8px 4px !important;
@@ -1384,15 +1280,13 @@ html, body {
         width: auto !important;
     }
 
-    /* === ESTILOS PARA CARTÕES DE SENSORES DINÂMICOS === */
-
 .sensor-card {
     background: white;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     margin-bottom: 10px;
-    border-left: 5px solid #ccc; /* Cor padrão offline */
+    border-left: 5px solid #ccc;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1405,11 +1299,11 @@ html, body {
 }
 
 .sensor-card.online {
-    border-left-color: #10b981; /* Verde */
+    border-left-color: #10b981;
 }
 
 .sensor-card.offline {
-    border-left-color: #ef4444; /* Vermelho */
+    border-left-color: #ef4444;
 }
 
 .sensor-info h4 {

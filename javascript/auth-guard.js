@@ -1,6 +1,3 @@
-/* === auth-guard.js === */
-/* Gerencia Autenticação e Menu Mobile Globalmente */
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
 
@@ -17,7 +14,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// --- 1. Lógica do Menu Mobile (Executa assim que o DOM carrega) ---
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Inicializando Menu Mobile...");
     
@@ -25,18 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav');
 
     if (btnMobile && navMenu) {
-        // Remove clones de event listeners antigos
         const newBtn = btnMobile.cloneNode(true);
         btnMobile.parentNode.replaceChild(newBtn, btnMobile);
 
         newBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log("Menu clicado!"); // Debug
+            console.log("Menu clicado!"); 
             navMenu.classList.toggle('active');
         });
 
-        // Fecha ao clicar nos links
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
@@ -47,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- 2. Lógica de Usuário e Auth ---
 const userElements = {
     name: document.querySelector('.user-name'),
     dropdownName: document.querySelector('.dropdown-user-name'),
@@ -58,18 +51,15 @@ const userElements = {
 };
 
 onAuthStateChanged(auth, (user) => {
-    // Se não tem usuário, simula um (Modo Prototipagem)
     const currentUser = user || { 
         email: "agente.silva@forestwatch.gov.br", 
         displayName: "Agente Silva" 
     };
 
-    // Formata nome
     const rawName = currentUser.email.split('@')[0];
     const formattedName = rawName.split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
     const initials = formattedName.substring(0, 2).toUpperCase();
 
-    // Atualiza UI com segurança (verifica se elemento existe antes de preencher)
     if (userElements.name) userElements.name.textContent = formattedName;
     if (userElements.dropdownName) userElements.dropdownName.textContent = formattedName;
     if (userElements.email) userElements.email.textContent = currentUser.email;
@@ -79,7 +69,6 @@ onAuthStateChanged(auth, (user) => {
     userElements.avatars.forEach(av => av.textContent = initials);
 });
 
-// --- 3. Dropdown Desktop ---
 const userMenuBtn = document.getElementById('user-menu-btn');
 const userDropdown = document.getElementById('user-dropdown');
 
@@ -95,7 +84,6 @@ if (userMenuBtn && userDropdown) {
     });
 }
 
-// --- 4. Logout ---
 window.fazerLogout = () => {
     signOut(auth).then(() => window.location.reload()).catch(console.error);
 };
